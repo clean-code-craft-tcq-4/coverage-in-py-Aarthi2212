@@ -27,8 +27,8 @@ class TypewiseTest(unittest.TestCase):
       self.assertTrue(typewise_alert.set_cooling_limits(
         test.get(const.COOLING_TYPE)) == test.get(const.RESULT))
 
-  def test_alert(self):
-    for test in test_inputs.ALERT_INPUT_OUTPUT:
+  def test_check_and_alert(self):
+    for test in test_inputs.CHECK_ALERT_INPUT_OUTPUT:
       battery = Battery()
       battery.set_cooling_type(test.get(const.COOLING_TYPE))
       with patch(STD_OUT, new = StringIO()) as fake_out:
@@ -37,6 +37,15 @@ class TypewiseTest(unittest.TestCase):
           battery.to_dictionary(), 
           test.get(const.VALUE))
         self.assertEqual(fake_out.getvalue(), test.get(const.RESULT))
+  
+  def test_alert(self):
+    for test in test_inputs.ALERT_INPUT_OUTPUT:
+      with patch(STD_OUT, new = StringIO()) as fake_out:
+        typewise_alert.alert(
+          test.get(const.ALERT_TARGET),
+          test.get(const.BREACH_TYPE))
+        self.assertEqual(fake_out.getvalue(), test.get(const.RESULT))
+
 
 if __name__ == '__main__':
   unittest.main()

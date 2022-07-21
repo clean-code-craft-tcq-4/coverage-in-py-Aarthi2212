@@ -53,7 +53,7 @@ COOLING_LIMIT_INPUT_OUTPUT = [
     }
 ]
 
-ALERT_INPUT_OUTPUT = [
+CHECK_ALERT_INPUT_OUTPUT = [
     {
         const.COOLING_TYPE : const.PASSIVE_COOLING,
         const.ALERT_TARGET: const.EMAIL_ALERT,
@@ -72,5 +72,28 @@ ALERT_INPUT_OUTPUT = [
         const.VALUE: 70,
         const.RESULT: '65261, TOO_HIGH\n'
    
+    }
+]
+
+ALERT_INPUT_OUTPUT = [
+    {
+        const.ALERT_TARGET: const.EMAIL_ALERT,
+        const.BREACH_TYPE: const.TOO_HIGH,
+        const.RESULT: "{}\n{}\n".format(f'To: {const.RECEPIENT}', 'Hi, the temperature is too high')
+    },
+    {
+        const.ALERT_TARGET: const.EMAIL_ALERT,
+        const.BREACH_TYPE: const.TOO_LOW,
+        const.RESULT: "{}\n{}\n".format(f'To: {const.RECEPIENT}', 'Hi, the temperature is too low')
+    },
+    {
+        const.ALERT_TARGET: const.CONTROLLER_ALERT,
+        const.BREACH_TYPE: const.TOO_HIGH,
+        const.RESULT: '65261, TOO_HIGH\n'
+    },
+    {
+        const.ALERT_TARGET: const.CONTROLLER_ALERT,
+        const.BREACH_TYPE: const.TOO_LOW,
+        const.RESULT: '65261, TOO_LOW\n'
     }
 ]
