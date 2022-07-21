@@ -53,6 +53,10 @@ COOLING_LIMIT_INPUT_OUTPUT = [
     {
         const.COOLING_TYPE : const.HI_ACTIVE_COOLING,
         const.RESULT: (45, 0)
+    },
+    {
+        const.COOLING_TYPE : "LOW_ACTIVE_COOLING",
+        const.RESULT: (0, 0)
     }
 ]
 
