@@ -1,4 +1,4 @@
-from alert import Alert
+from alert_type_factory import AlertTypeFactory
 import constants as const
 
 def infer_breach(value, lower_limit, upper_limit):
@@ -12,7 +12,7 @@ def infer_breach(value, lower_limit, upper_limit):
 def set_cooling_limits(cooling_type):
   upper_limit = 0
   lower_limit = 0
-  limits = const.COOLING_LIMITS.get(cooling_type)
+  limits = const.COOLING_LIMITS.get(cooling_type, None)
   if limits is not None:
     upper_limit =  limits.get(const.UPPER_LIMIT)
     lower_limit = limits.get(const.LOWER_LIMIT)
@@ -23,11 +23,12 @@ def classify_temperature_breach(cooling_type, temperature_in_celsius):
   return infer_breach(temperature_in_celsius, lower_limit, upper_limit)
 
 def alert(alert_target, breach_type):
-  alert = Alert(breach_type)
-  if alert_target == const.CONTROLLER_ALERT:
-    alert.send_to_controller()
-  elif alert_target == const.EMAIL_ALERT:
-    alert.send_to_email()
+  alert_type_factory = AlertTypeFactory(breach_type)
+  alert_type = alert_type_factory.get_alert_type(alert_target)
+  if alert_type != None:
+    alert_type()
+  else:
+    print(const.UNSUPPORTED_ALERT_TARGET)
 
 def check_and_alert_breach(alert_target, battery, temperature_in_celsius):
   breach_type =\
@@ -35,4 +36,4 @@ def check_and_alert_breach(alert_target, battery, temperature_in_celsius):
   if breach_type not in [const.NORMAL, None]:
     alert(alert_target, breach_type)
   else:
-    print("No Breach")
+    print(const.NO_BREACH)

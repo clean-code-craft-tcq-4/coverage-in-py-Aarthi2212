@@ -1,4 +1,3 @@
-from email import message
 import constants as const
 class Alert:
     def __init__(self, breach_type) -> None:
@@ -14,8 +13,8 @@ class Alert:
 
     def send_to_email(self):
         if self.breach_type == const.TOO_LOW:
-            message = 'Hi, the temperature is too low'
+            message = const.EMAIL_LOW_TEMPERATURE
         else:
-            message = 'Hi, the temperature is too high'
+            message = const.EMAIL_HIGH_TEMPERATURE
         self.send_mail(message)
         

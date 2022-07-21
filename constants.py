@@ -14,6 +14,10 @@ BREACH_TYPE = 'BREACH_TYPE'
 CONTROLLER_ALERT = 'TO_CONTROLLER'
 EMAIL_ALERT = 'TO_EMAIL'
 RECEPIENT = "a.b@c.com"
+EMAIL_LOW_TEMPERATURE = 'Hi, the temperature is too low'
+EMAIL_HIGH_TEMPERATURE = 'Hi, the temperature is too high'
+NO_BREACH = "No Breach"
+UNSUPPORTED_ALERT_TARGET = "Alert Target not supported"
 COOLING_LIMITS = {
     PASSIVE_COOLING: {
         LOWER_LIMIT: 0,
